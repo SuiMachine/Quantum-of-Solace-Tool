@@ -1,0 +1,8 @@
+D:\Projekty\QoS\bin\Release\QuantumOfSolace.exe
+D:\Projekty\QoS\bin\Release\QuantumOfSolace.pdb
+D:\Projekty\QoS\obj\x86\Release\QuantumOfSolace.Form1.resources
+D:\Projekty\QoS\obj\x86\Release\QuantumOfSolace.Properties.Resources.resources
+D:\Projekty\QoS\obj\x86\Release\QuantumOfSolaceTool.csproj.GenerateResource.Cache
+D:\Projekty\QoS\obj\x86\Release\QuantumOfSolace.exe
+D:\Projekty\QoS\obj\x86\Release\QuantumOfSolace.pdb
+D:\Projekty\QoS\obj\x86\Release\QuantumOfSolaceTool.csprojResolveAssemblyReference.cache
