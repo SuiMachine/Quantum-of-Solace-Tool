@@ -59,10 +59,10 @@ namespace QuantumOfSolace
         private void Timer_Tick(object sender, EventArgs e)
         {
             myProcess = Process.GetProcessesByName(processName);
-            if (myProcess.Length > 0 && !foundProcess)
+            if (myProcess.Length > 0)
             {
-                IntPtr startOffset = myProcess[0].MainModule.BaseAddress;
-                IntPtr endOffset = IntPtr.Add(startOffset, myProcess[0].MainModule.ModuleMemorySize);
+                if (foundProcess == false)
+                    System.Threading.Thread.Sleep(1000);
                 foundProcess = true;
             }
 
@@ -222,6 +222,7 @@ namespace QuantumOfSolace
             else
             {
                 autoModeFullscreen = true;
+                MessageBox.Show("The game will not run in proper windowed mode! The feature is buggy.\n Basically the game, will always remain on top, no matter what.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning );
                 fullscreen = 0;
             }
         }
