@@ -14,9 +14,8 @@ namespace QuantumOfSolace
 
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
-        Image imgSA, imgNotSA;
         Process[] myProcess;
-        string gameName, processName;
+        string processName;
      
         float fov=85;
         int fps=90;
@@ -40,6 +39,7 @@ namespace QuantumOfSolace
         bool disableBalancing;
 
         string labelUrl = "www.pcgamingwiki.com";
+        string DonateURL = "https://www.twitchalerts.com/donate/suicidemachine";
 
 
         /*------------------
@@ -48,9 +48,6 @@ namespace QuantumOfSolace
         public Form1()
         {
             InitializeComponent();
-            imgSA = Properties.Resources.Yes;
-            imgNotSA = Properties.Resources.No;
-            gameName = "JB_LiveEngine_s";
             processName = "JB_LiveEngine_s";
         }
 
@@ -58,47 +55,53 @@ namespace QuantumOfSolace
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            myProcess = Process.GetProcessesByName(processName);
-            if (myProcess.Length > 0)
+            try
             {
-                if (foundProcess == false)
-                    System.Threading.Thread.Sleep(1000);
-                foundProcess = true;
+                myProcess = Process.GetProcessesByName(processName);
+                if (myProcess.Length > 0)
+                {
+                    if (foundProcess == false)
+                        System.Threading.Thread.Sleep(100);
+                    foundProcess = true;
+                }
+
+                if (foundProcess)
+                {
+                    // The game is running, ready for memory reading.
+                    LB_Running.Text = "007: Quantum of Solace is running";
+                    LB_Running.ForeColor = Color.Green;
+
+                    readFov = Trainer.ReadPointerFloat(processName, baseAddress + fovAddress, offsets);
+                    readFPS = Trainer.ReadInteger(processName, baseAddress + fpsAdresss);
+                    readFullscreen = Trainer.ReadInteger(processName, baseAddress + fullscreenAdresss);
+                    readBalance = Trainer.ReadByte(processName, baseAddress + balanceAdresss);
+
+                    L_fov.Text = readFov.ToString();
+                    L_fps.Text = readFPS.ToString();
+                    L_fullscreen.Text = readFullscreen.ToString();
+
+                    if (autoModeFOV)
+                        ChangeFov();
+                    if (autoModeFPS)
+                        ChangeFPS();
+                    if (autoModeFullscreen)
+                        ChangeFullscreen();
+                    if (disableBalancing)
+                        freezeBalance();
+                }
+                else
+                {
+                    // The game process has not been found, reseting values.
+                    LB_Running.Text = "007: Quantum of Solace is NOT running";
+                    LB_Running.ForeColor = Color.Red;
+                    ResetValues();
+                }
             }
-
-            if (foundProcess)
+            catch(Exception ex)
             {
-                // The game is running, ready for memory reading.
-                LB_Running.Text = "007: Quantum of Solace is running";
-                LB_Running.ForeColor = Color.Green;
-
-                readFov = Trainer.ReadPointerFloat(processName, baseAddress+fovAddress, offsets);
-                readFPS = Trainer.ReadInteger(processName, baseAddress+fpsAdresss);
-                readFullscreen = Trainer.ReadInteger(processName, baseAddress + fullscreenAdresss);
-                readBalance = Trainer.ReadByte(processName, baseAddress + balanceAdresss);
-
-                L_fov.Text = readFov.ToString();
-                L_fps.Text = readFPS.ToString();
-                L_fullscreen.Text = readFullscreen.ToString();
-
-                if (autoModeFOV)
-                    ChangeFov();
-                if (autoModeFPS)
-                    ChangeFPS();
-                if (autoModeFullscreen)
-                    ChangeFullscreen();
-                if (disableBalancing)
-                    freezeBalance();
-            }
-            else
-            {
-                // The game process has not been found, reseting values.
-                LB_Running.Text = "007: Quantum of Solace is NOT running";
-                LB_Running.ForeColor = Color.Red;
-                ResetValues();
+                Debug.WriteLine(ex.ToString());
             }
         }
-
         // Called when the game is not running or no mission is active.
         // Used to reset all the values.
         private void ResetValues()
@@ -243,6 +246,10 @@ namespace QuantumOfSolace
                 disableBalancing = false;
             }
         }
-    }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start(DonateURL);
+        }
+    }
 }

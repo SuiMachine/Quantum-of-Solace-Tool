@@ -55,11 +55,13 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.C_balance = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.InputPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Timer
@@ -110,6 +112,7 @@
             // InputPanel
             // 
             this.InputPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputPanel.Controls.Add(this.pictureBox1);
             this.InputPanel.Controls.Add(this.linkLabel);
             this.InputPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.InputPanel.Location = new System.Drawing.Point(0, 184);
@@ -309,6 +312,17 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "No Balancing Mini-game";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::QuantumOfSolace.Properties.Resources.donatebutton;
+            this.pictureBox1.Location = new System.Drawing.Point(514, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(74, 21);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,6 +359,7 @@
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,6 +392,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.CheckBox C_balance;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

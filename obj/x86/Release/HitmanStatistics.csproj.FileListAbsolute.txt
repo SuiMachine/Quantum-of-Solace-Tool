@@ -1,7 +1,0 @@
-C:\Users\Sid\Desktop\HitmanStatistics-2.1\HitmanStatistics-2.1\bin\Release\HitmanStatistics.exe
-C:\Users\Sid\Desktop\HitmanStatistics-2.1\HitmanStatistics-2.1\bin\Release\HitmanStatistics.pdb
-C:\Users\Sid\Desktop\HitmanStatistics-2.1\HitmanStatistics-2.1\obj\x86\Release\HitmanStatistics.Form1.resources
-C:\Users\Sid\Desktop\HitmanStatistics-2.1\HitmanStatistics-2.1\obj\x86\Release\HitmanStatistics.Properties.Resources.resources
-C:\Users\Sid\Desktop\HitmanStatistics-2.1\HitmanStatistics-2.1\obj\x86\Release\HitmanStatistics.csproj.GenerateResource.Cache
-C:\Users\Sid\Desktop\HitmanStatistics-2.1\HitmanStatistics-2.1\obj\x86\Release\HitmanStatistics.exe
-C:\Users\Sid\Desktop\HitmanStatistics-2.1\HitmanStatistics-2.1\obj\x86\Release\HitmanStatistics.pdb

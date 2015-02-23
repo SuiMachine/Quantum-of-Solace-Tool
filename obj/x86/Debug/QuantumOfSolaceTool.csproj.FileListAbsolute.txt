@@ -1,8 +1,0 @@
-D:\Projekty\QoS\obj\x86\Debug\QuantumOfSolaceTool.csprojResolveAssemblyReference.cache
-D:\Projekty\QoS\obj\x86\Debug\QuantumOfSolace.Properties.Resources.resources
-D:\Projekty\QoS\obj\x86\Debug\QuantumOfSolaceTool.csproj.GenerateResource.Cache
-D:\Projekty\QoS\obj\x86\Debug\QuantumOfSolace.Form1.resources
-D:\Projekty\QoS\bin\Debug\QuantumOfSolace.exe
-D:\Projekty\QoS\bin\Debug\QuantumOfSolace.pdb
-D:\Projekty\QoS\obj\x86\Debug\QuantumOfSolace.exe
-D:\Projekty\QoS\obj\x86\Debug\QuantumOfSolace.pdb
