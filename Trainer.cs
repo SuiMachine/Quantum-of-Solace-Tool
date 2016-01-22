@@ -83,14 +83,13 @@ public class Trainer
         }
         return result;
     }
-    public static byte ReadByte(string EXENAME, int Address)
+    public static byte ReadByte(Process[] Proc, int Address)
     {
         byte Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -107,14 +106,13 @@ public class Trainer
         }
         return Value;
     }
-    public static int ReadInteger(string EXENAME, int Address)
+    public static int ReadInteger(Process[] Proc, int Address)
     {
         int Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -131,14 +129,13 @@ public class Trainer
         }
         return Value;
     }
-    public static float ReadFloat(string EXENAME, int Address)
+    public static float ReadFloat(Process[] Proc, int Address)
     {
         float Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -155,14 +152,13 @@ public class Trainer
         }
         return Value;
     }
-    public static double ReadDouble(string EXENAME, int Address)
+    public static double ReadDouble(Process[] Proc, int Address)
     {
         double Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -180,14 +176,13 @@ public class Trainer
         return Value;
     }
 
-    public static byte ReadPointerByte(string EXENAME, int Pointer, int[] Offset)
+    public static byte ReadPointerByte(Process[] Proc, int Pointer, int[] Offset)
     {
         byte Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -209,14 +204,13 @@ public class Trainer
         }
         return Value;
     }
-    public static int ReadPointerInteger(string EXENAME, int Pointer, int[] Offset)
+    public static int ReadPointerInteger(Process[] Proc, int Pointer, int[] Offset)
     {
         int Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -238,14 +232,13 @@ public class Trainer
         }
         return Value;
     }
-    public static float ReadPointerFloat(string EXENAME, int Pointer, int[] Offset)
+    public static float ReadPointerFloat(Process[] Proc, int Pointer, int[] Offset)
     {
         float Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -267,14 +260,13 @@ public class Trainer
         }
         return Value;
     }
-    public static double ReadPointerDouble(string EXENAME, int Pointer, int[] Offset)
+    public static double ReadPointerDouble(Process[] Proc, int Pointer, int[] Offset)
     {
         double Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -297,13 +289,12 @@ public class Trainer
         return Value;
     }
 
-    public static void WriteByte(string EXENAME, int Address, byte Value)
+    public static void WriteByte(Process[] Proc, int Address, byte Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -319,13 +310,12 @@ public class Trainer
             { }
         }
     }
-    public static void WriteInteger(string EXENAME, int Address, int Value)
+    public static void WriteInteger(Process[] Proc, int Address, int Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -341,13 +331,12 @@ public class Trainer
             { }
         }
     }
-    public static void WriteFloat(string EXENAME, int Address, float Value)
+    public static void WriteFloat(Process[] Proc, int Address, float Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -364,13 +353,12 @@ public class Trainer
             { }
         }
     }
-    public static void WriteDouble(string EXENAME, int Address, double Value)
+    public static void WriteDouble(Process[] Proc, int Address, double Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Bytes = 0;
@@ -387,13 +375,12 @@ public class Trainer
         }
     }
 
-    public static void WritePointerByte(string EXENAME, int Pointer, int[] Offset, byte Value)
+    public static void WritePointerByte(Process[] Proc, int Pointer, int[] Offset, byte Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
@@ -414,13 +401,12 @@ public class Trainer
             { }
         }
     }
-    public static void WritePointerInteger(string EXENAME, int Pointer, int[] Offset, int Value)
+    public static void WritePointerInteger(Process[] Proc, int Pointer, int[] Offset, int Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
@@ -441,13 +427,12 @@ public class Trainer
             { }
         }
     }
-    public static void WritePointerFloat(string EXENAME, int Pointer, int[] Offset, float Value)
+    public static void WritePointerFloat(Process[] Proc, int Pointer, int[] Offset, float Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
@@ -468,13 +453,12 @@ public class Trainer
             { }
         }
     }
-    public static void WritePointerDouble(string EXENAME, int Pointer, int[] Offset, double Value)
+    public static void WritePointerDouble(Process[] Proc, int Pointer, int[] Offset, double Value)
     {
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
                 if (Proc.Length != 0)
                 {
                     int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);

@@ -64,6 +64,14 @@ namespace QuantumOfSolace
                         System.Threading.Thread.Sleep(100);
                     foundProcess = true;
                 }
+                else
+                {
+                    // The game process has not been found, reseting values.
+                    LB_Running.Text = "007: Quantum of Solace is NOT running";
+                    LB_Running.ForeColor = Color.Red;
+                    foundProcess = false;
+                    ResetValues();
+                }
 
                 if (foundProcess)
                 {
@@ -71,10 +79,10 @@ namespace QuantumOfSolace
                     LB_Running.Text = "007: Quantum of Solace is running";
                     LB_Running.ForeColor = Color.Green;
 
-                    readFov = Trainer.ReadPointerFloat(processName, baseAddress + fovAddress, offsets);
-                    readFPS = Trainer.ReadInteger(processName, baseAddress + fpsAdresss);
-                    readFullscreen = Trainer.ReadInteger(processName, baseAddress + fullscreenAdresss);
-                    readBalance = Trainer.ReadByte(processName, baseAddress + balanceAdresss);
+                    readFov = Trainer.ReadPointerFloat(myProcess, baseAddress + fovAddress, offsets);
+                    readFPS = Trainer.ReadInteger(myProcess, baseAddress + fpsAdresss);
+                    readFullscreen = Trainer.ReadInteger(myProcess, baseAddress + fullscreenAdresss);
+                    readBalance = Trainer.ReadByte(myProcess, baseAddress + balanceAdresss);
 
                     L_fov.Text = readFov.ToString();
                     L_fps.Text = readFPS.ToString();
@@ -88,13 +96,6 @@ namespace QuantumOfSolace
                         ChangeFullscreen();
                     if (disableBalancing)
                         freezeBalance();
-                }
-                else
-                {
-                    // The game process has not been found, reseting values.
-                    LB_Running.Text = "007: Quantum of Solace is NOT running";
-                    LB_Running.ForeColor = Color.Red;
-                    ResetValues();
                 }
             }
             catch(Exception ex)
@@ -119,7 +120,7 @@ namespace QuantumOfSolace
             if (fovAddress != 0x0000000 && foundProcess)
             {
                 if (readFov != fov)
-                    Trainer.WritePointerFloat(processName, baseAddress+fovAddress, offsets, fov);
+                    Trainer.WritePointerFloat(myProcess, baseAddress +fovAddress, offsets, fov);
             }
         }
 
@@ -128,7 +129,7 @@ namespace QuantumOfSolace
             if (fpsAdresss != 0x0000000 && foundProcess)
             { 
                 if(readFPS !=fps)
-                    Trainer.WriteInteger(processName, baseAddress + fpsAdresss, fps);
+                    Trainer.WriteInteger(myProcess, baseAddress + fpsAdresss, fps);
             }
                 
         }
@@ -138,7 +139,7 @@ namespace QuantumOfSolace
             if (fullscreenAdresss != 0x0000000 && foundProcess)
             {
                 if (readFullscreen !=fullscreen)
-                    Trainer.WriteInteger(processName, baseAddress + fullscreenAdresss, fullscreen);
+                    Trainer.WriteInteger(myProcess, baseAddress + fullscreenAdresss, fullscreen);
             }
         }
 
@@ -147,7 +148,7 @@ namespace QuantumOfSolace
             if (balanceAdresss != 0x0000000 && foundProcess)
             {
                 if (readBalance != balance)
-                    Trainer.WriteByte(processName, baseAddress + balanceAdresss, balance);
+                    Trainer.WriteByte(myProcess, baseAddress + balanceAdresss, balance);
             }
         }
 
