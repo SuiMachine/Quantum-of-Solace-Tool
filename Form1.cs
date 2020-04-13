@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
+using System.Linq;
 using System.Collections.Generic;
 
 
@@ -10,7 +11,7 @@ namespace QuantumOfSolace
     public partial class Form1 : Form
     {
         // Base address value for pointers.
-        int baseAddress = 0x10000000;
+        int baseAddress = 0x0;
 
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
@@ -26,9 +27,9 @@ namespace QuantumOfSolace
         int readFPS = 0;
         int readFullscreen = 0;
         byte readBalance = 0;
-        int[] offsets = new int[] { 0x740 };
+        int[] offsets = new int[] { 0x10 };
 
-        int fovAddress = 0x01A37C98;
+        int fovAddress = 0x1C523DC;
         int fpsAdresss = 0x1A36E50;
         int fullscreenAdresss = 0x13A74C4;
         int balanceAdresss = 0x20B1FBA;
@@ -61,8 +62,21 @@ namespace QuantumOfSolace
                 if (myProcess.Length > 0)
                 {
                     if (foundProcess == false)
+                    {
                         System.Threading.Thread.Sleep(100);
+                        //baseAddress = myProcess[0].MainModule.BaseAddress.ToInt32();
+                        //var lenght = myProcess[0].MainModule.ModuleMemorySize;
+                    }
                     foundProcess = true;
+
+                    if (baseAddress == 0x0)
+                    {
+                        LB_Running.Text = "Getting base address...";
+                        LB_Running.ForeColor = Color.Blue;
+                        var module = GetModule(myProcess[0].Modules);
+                        if (module != null)
+                            baseAddress = module.BaseAddress.ToInt32();
+                    }
                 }
                 else
                 {
@@ -72,6 +86,7 @@ namespace QuantumOfSolace
                     foundProcess = false;
                     ResetValues();
                 }
+
 
                 if (foundProcess)
                 {
@@ -103,10 +118,22 @@ namespace QuantumOfSolace
                 Debug.WriteLine(ex.ToString());
             }
         }
+
+        private ProcessModule GetModule(ProcessModuleCollection modules)
+        {
+            for(int i=0; i<modules.Count; i++)
+            {
+                if (modules[i].ModuleName != null && modules[i].ModuleName.ToLower() == "jb_sp_s.dll")
+                    return modules[i];
+            }
+            return null;
+        }
+
         // Called when the game is not running or no mission is active.
         // Used to reset all the values.
         private void ResetValues()
         {
+            baseAddress = 0x0;
         }
 
         private void Form1_Load(object sender, EventArgs e)

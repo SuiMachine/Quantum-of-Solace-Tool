@@ -43,11 +43,14 @@ Temporary Items
 .apdisk
 
 *.sublime-workspace
-obj/
-bin/
+obj/*
+bin/*
 *.suo
 *.user
 *.vspx
 *.psess
 *.rar
+
+#Other garbage
+.vs/*
 
