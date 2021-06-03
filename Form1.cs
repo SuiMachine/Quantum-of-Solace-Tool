@@ -217,8 +217,7 @@ namespace QuantumOfSolace
 		{
 			if (fpsAdresss != 0x0000000 && foundProcess)
 			{
-				if (readFPS != fps)
-					Trainer.WriteInteger(myProcess, baseAddress + fpsAdresss, 30);
+				Trainer.WriteInteger(myProcess, baseAddress + fpsAdresss, 30);
 			}
 		}
 

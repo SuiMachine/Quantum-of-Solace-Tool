@@ -53,4 +53,4 @@ bin/*
 
 #Other garbage
 .vs/*
-
+*.zip
