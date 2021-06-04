@@ -60,14 +60,13 @@ namespace QuantumOfSolace
 		{
 			keyboardHook = new KeyboardHook.LowLevelKeyboardHook();
 			RegisterHotkeys();
+			keyboardHook.KeyPressed += KeyboardHook_KeyPressed;
 		}
 
 		private void RegisterHotkeys()
 		{
 			keyboardHook.RegisterHotKey(toggleKey);
-			B_ToggleFPSKey.Text = toggleKey.ToString();
-
-			keyboardHook.KeyPressed += KeyboardHook_KeyPressed;
+			TB_ToggleKey.Text = toggleKey.ToString();
 		}
 
 		public delegate void KeyboardHook_KeyPressedDelagate(KeyEventArgs e);
@@ -111,6 +110,7 @@ namespace QuantumOfSolace
 			try
 			{
 				keyboardHook.Poll();
+
 				myProcess = Process.GetProcessesByName(processName);
 				if (myProcess.Length > 0)
 				{
@@ -299,6 +299,13 @@ namespace QuantumOfSolace
 		private void pictureBox1_Click(object sender, EventArgs e)
 		{
 			Process.Start(DonateURL);
+		}
+
+		private void TB_ToggleKey_KeyDown(object sender, KeyEventArgs e)
+		{
+			keyboardHook.UnregisterAllHotkeys();
+			toggleKey = e.KeyCode;
+			RegisterHotkeys();
 		}
 	}
 }

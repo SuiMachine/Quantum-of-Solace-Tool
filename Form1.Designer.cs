@@ -55,8 +55,8 @@
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.C_balance = new System.Windows.Forms.CheckBox();
 			this.label7 = new System.Windows.Forms.Label();
-			this.B_ToggleFPSKey = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
+			this.TB_ToggleKey = new System.Windows.Forms.TextBox();
 			this.InputPanel.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -308,15 +308,6 @@
 			this.label7.TabIndex = 0;
 			this.label7.Text = "No Balancing Mini-game";
 			// 
-			// B_ToggleFPSKey
-			// 
-			this.B_ToggleFPSKey.Location = new System.Drawing.Point(388, 104);
-			this.B_ToggleFPSKey.Name = "B_ToggleFPSKey";
-			this.B_ToggleFPSKey.Size = new System.Drawing.Size(75, 23);
-			this.B_ToggleFPSKey.TabIndex = 51;
-			this.B_ToggleFPSKey.Text = "F5";
-			this.B_ToggleFPSKey.UseVisualStyleBackColor = true;
-			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
@@ -326,13 +317,22 @@
 			this.label3.TabIndex = 52;
 			this.label3.Text = "Toggle FPS key:";
 			// 
+			// TB_ToggleKey
+			// 
+			this.TB_ToggleKey.Location = new System.Drawing.Point(388, 104);
+			this.TB_ToggleKey.Name = "TB_ToggleKey";
+			this.TB_ToggleKey.ReadOnly = true;
+			this.TB_ToggleKey.Size = new System.Drawing.Size(124, 20);
+			this.TB_ToggleKey.TabIndex = 53;
+			this.TB_ToggleKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_ToggleKey_KeyDown);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(595, 216);
+			this.Controls.Add(this.TB_ToggleKey);
 			this.Controls.Add(this.label3);
-			this.Controls.Add(this.B_ToggleFPSKey);
 			this.Controls.Add(this.panel4);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.C_AutoModeFPS);
@@ -397,8 +397,8 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.CheckBox C_balance;
         private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.Button B_ToggleFPSKey;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox TB_ToggleKey;
 	}
 }
 
