@@ -10,6 +10,7 @@ namespace QuantumOfSolace
 {
 	public partial class Form1 : Form
 	{
+		UserPreferences userPreferences;
 		// Base address value for pointers.
 		int baseAddress = 0x0;
 
@@ -39,11 +40,12 @@ namespace QuantumOfSolace
 		bool disableBalancing;
 
 		string labelUrl = "www.pcgamingwiki.com";
-		string DonateURL = "https://www.twitchalerts.com/donate/suicidemachine";
 
 		//Keyboard hook
 		KeyboardHook.LowLevelKeyboardHook keyboardHook;
 		Keys toggleKey;
+
+		bool initialized = false;
 
 
 		/*------------------
@@ -51,9 +53,28 @@ namespace QuantumOfSolace
         ------------------*/
 		public Form1()
 		{
+			userPreferences = UserPreferences.Load();
 			InitializeComponent();
 			processName = "JB_LiveEngine_s";
-			toggleKey = Keys.F5;
+			LoadUserPreferences();
+		}
+
+		private void LoadUserPreferences()
+		{
+			fov = userPreferences.DesiredFOV;
+			autoModeFOV = userPreferences.DesiredFOVHackEnabled;
+
+			fps = userPreferences.DesiredFPS;
+			autoModeFPS = userPreferences.DesiredFPSHackEnabled;
+
+			if (!userPreferences.FullScreenMode)
+			{
+				autoModeFullscreen = true;
+				fullscreen = 0;
+			}
+
+			disableBalancing = userPreferences.NoBalancingMiniGame;
+			toggleKey = userPreferences.DesiredFPSToggleKey;
 		}
 
 		private void Form1_Shown(object sender, EventArgs e)
@@ -61,6 +82,17 @@ namespace QuantumOfSolace
 			keyboardHook = new KeyboardHook.LowLevelKeyboardHook();
 			RegisterHotkeys();
 			keyboardHook.KeyPressed += KeyboardHook_KeyPressed;
+
+			//Set toggles, textboxes
+			C_AutoModeFOV.Checked = autoModeFOV;
+			T_InputFOV.Text = fov.ToString();
+
+			C_AutoModeFPS.Checked = autoModeFPS;
+			T_InputFPS.Text = fps.ToString();
+
+			C_balance.Checked = disableBalancing;
+			C_fullscreen.Checked = fullscreen != 0;
+			initialized = true;
 		}
 
 		private void RegisterHotkeys()
@@ -73,10 +105,10 @@ namespace QuantumOfSolace
 
 		private void KeyboardHook_KeyPressed(object sender, KeyEventArgs e)
 		{
-			if(C_AutoModeFOV.InvokeRequired)
+			if (C_AutoModeFOV.InvokeRequired)
 			{
 				KeyboardHook_KeyPressedDelagate d = new KeyboardHook_KeyPressedDelagate(ToggleFPSLock);
-				this.Invoke(d, e );
+				this.Invoke(d, e);
 			}
 			else
 			{
@@ -118,7 +150,6 @@ namespace QuantumOfSolace
 					{
 						System.Threading.Thread.Sleep(100);
 						//baseAddress = myProcess[0].MainModule.BaseAddress.ToInt32();
-						//var lenght = myProcess[0].MainModule.ModuleMemorySize;
 					}
 					foundProcess = true;
 
@@ -242,11 +273,13 @@ namespace QuantumOfSolace
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			keyboardHook.KeyPressed -= KeyboardHook_KeyPressed;
+			userPreferences.Save();
 		}
 
 		private void C_AutoModeFOV_CheckedChanged(object sender, EventArgs e)
 		{
 			autoModeFOV = C_AutoModeFOV.Checked;
+			userPreferences.DesiredFOVHackEnabled = autoModeFOV;
 		}
 
 		private void B_set_Click(object sender, EventArgs e)
@@ -254,6 +287,7 @@ namespace QuantumOfSolace
 			if (float.TryParse(T_InputFOV.Text, out float res))
 			{
 				fov = res;
+				userPreferences.DesiredFOV = fov;
 			}
 		}
 
@@ -262,6 +296,7 @@ namespace QuantumOfSolace
 			if (int.TryParse(T_InputFPS.Text, out int resFPS))
 			{
 				fps = resFPS;
+				userPreferences.DesiredFPS = fps;
 			}
 		}
 
@@ -273,6 +308,7 @@ namespace QuantumOfSolace
 		private void C_AutoModeFPS_CheckedChanged(object sender, EventArgs e)
 		{
 			autoModeFPS = C_AutoModeFPS.Checked;
+			userPreferences.DesiredFPSHackEnabled = autoModeFPS;
 		}
 
 		private void C_windowed_CheckedChanged(object sender, EventArgs e)
@@ -285,20 +321,18 @@ namespace QuantumOfSolace
 			else
 			{
 				autoModeFullscreen = true;
-				MessageBox.Show("The game will not run in proper windowed mode! The feature is buggy.\n Basically the game, will always remain on top, no matter what.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				if (initialized)
+					MessageBox.Show("The game will not run in proper windowed mode! The feature is buggy.\n Basically the game, will always remain on top, no matter what.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				fullscreen = 0;
 			}
+			userPreferences.FullScreenMode = fullscreen != 0;
 		}
 
 
 		private void C_balance_CheckedChanged(object sender, EventArgs e)
 		{
 			disableBalancing = C_balance.Checked;
-		}
-
-		private void pictureBox1_Click(object sender, EventArgs e)
-		{
-			Process.Start(DonateURL);
+			userPreferences.NoBalancingMiniGame = disableBalancing;
 		}
 
 		private void TB_ToggleKey_KeyDown(object sender, KeyEventArgs e)

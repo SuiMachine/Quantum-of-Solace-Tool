@@ -68,6 +68,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Trainer.cs" />
+    <Compile Include="UserPreferences.cs" />
+    <Compile Include="XMLSerialization.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
